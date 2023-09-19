@@ -18,8 +18,8 @@ function knn(features, labels, predictionPoint, k) {
       .expandDims(1)
       .concat(labels, 1)
       .unstack()
-      .sort((tensorA, tensorB) => {
-        tensorA.arraySync(0) > tensorB.arraySync(0) ? 1 : -1;
+      .sort((a, b) => {
+        a.arraySync()[0] > b.arraySync()[0] ? 1 : -1;
       })
       .slice(0, k)
       .reduce((acc, pair) => acc + pair.arraySync()[1], 0) / k
